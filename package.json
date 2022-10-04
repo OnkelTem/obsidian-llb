@@ -1,0 +1,26 @@
+{
+  "name": "obsidian-dv-model-example",
+  "version": "1.0.0",
+  "description": "to be written",
+  "main": "model.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OnkelTem/obsidian-dv-model-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OnkelTem/obsidian-dv-model-example/issues"
+  },
+  "homepage": "https://github.com/OnkelTem/obsidian-dv-model-example#readme",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "obsidian-dataview": "^0.5.46",
+    "typescript": "^4.8.4"
+  }
+}
