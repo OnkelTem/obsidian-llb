@@ -1,4 +1,4 @@
-const modelWord = createModel({
+const wordModel = createModel({
   name: "word",
   location: "words",
   fields: {
@@ -18,19 +18,19 @@ const modelWord = createModel({
     {
       label: "Suffixes",
       render: ({ suffixes }) =>
-        Array.isArray(suffixes) ? suffixes.map((value) => resolveLink(value, modelSuffix.location)) : undefined,
+        Array.isArray(suffixes) ? suffixes.map((value) => resolveLink(value, suffixModel.location)) : undefined,
     },
     {
       label: "Base rev",
       render: (values) => {
         // const thisWord = note.file.name;
-        return "Is not implemented";
+        return "Not implemented";
       },
     },
   ],
 });
 
-const modelSuffix = createModel({
+const suffixModel = createModel({
   name: "suffix",
   location: "suffixes",
   fields: {
@@ -70,7 +70,7 @@ function main() {
       throw new Error(`Cannot read the current note.`);
     }
 
-    const model = [modelWord, modelSuffix].find((model) => model.name === note?.type);
+    const model = [wordModel, suffixModel].find((model) => model.name === note?.type);
     if (model == null) {
       throw new Error(`Cannot determine the model of the note.`);
     }
@@ -154,6 +154,10 @@ function types() {
             // String comma-separated array
             if (value.indexOf(",") !== -1) {
               return { value: value.split(/\s*,\s*/).filter((item) => item !== "") };
+            }
+            // Space separated array
+            if (value.indexOf(" ") !== -1) {
+              return { value: value.split(/ +/).filter((item) => item !== "") };
             }
             // Just one value, so be it an array of one element
             else {
