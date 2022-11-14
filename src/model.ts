@@ -5,6 +5,7 @@ const wordModel = createModel({
     type: types().fixed({ value: "word" }),
     suffixes: types().string({ multiple: true }),
     base: types().string({ multiple: true }),
+    date: types().string({ required: true }),
   },
   items: [
     {
@@ -20,13 +21,12 @@ const wordModel = createModel({
       render: ({ suffixes }) =>
         Array.isArray(suffixes) ? suffixes.map((value) => resolveLink(value, suffixModel.location)) : undefined,
     },
-    {
-      label: "Base rev",
-      render: (values) => {
-        // const thisWord = note.file.name;
-        return "Not implemented";
-      },
-    },
+    // {
+    //   label: "Base rev",
+    //   render: (values) => {
+    //     return "Not implemented";
+    //   },
+    // },
   ],
 });
 
@@ -155,10 +155,11 @@ function types() {
             if (value.indexOf(",") !== -1) {
               return { value: value.split(/\s*,\s*/).filter((item) => item !== "") };
             }
-            // Space separated array
-            if (value.indexOf(" ") !== -1) {
-              return { value: value.split(/ +/).filter((item) => item !== "") };
-            }
+            // Хуевая идея, так как тогда нельзя вводить фразы
+            // // Space separated array
+            // if (value.indexOf(" ") !== -1) {
+            //   return { value: value.split(/ +/).filter((item) => item !== "") };
+            // }
             // Just one value, so be it an array of one element
             else {
               return { value: [value] };
