@@ -1,0 +1,109 @@
+{
+  "choices": [
+    {
+      "id": "f687712e-7f4b-474f-adfe-f74c545f8397",
+      "name": "Word",
+      "type": "Capture",
+      "command": true,
+      "appendLink": true,
+      "captureTo": "_llb-tr_/vocab/words/{{VALUE}}.md",
+      "captureToActiveFile": false,
+      "createFileIfItDoesntExist": {
+        "enabled": true,
+        "createWithTemplate": true,
+        "template": "_llb-tr_/templates/word"
+      },
+      "format": {
+        "enabled": true,
+        "format": "\n\n"
+      },
+      "insertAfter": {
+        "enabled": true,
+        "after": "",
+        "insertAtEnd": false,
+        "createIfNotFound": false,
+        "createIfNotFoundLocation": "top"
+      },
+      "prepend": true,
+      "task": false,
+      "openFileInNewTab": {
+        "enabled": false,
+        "direction": "vertical",
+        "focus": true
+      },
+      "openFile": true,
+      "openFileInMode": "default"
+    },
+    {
+      "id": "94b69562-bf8b-41e4-b2db-2f2ac814b8c7",
+      "name": "Word (no link)",
+      "type": "Capture",
+      "command": true,
+      "appendLink": false,
+      "captureTo": "_llb-tr_/vocab/words/{{VALUE}}.md",
+      "captureToActiveFile": false,
+      "createFileIfItDoesntExist": {
+        "enabled": true,
+        "createWithTemplate": true,
+        "template": "_llb-tr_/templates/word"
+      },
+      "format": {
+        "enabled": true,
+        "format": "\n"
+      },
+      "insertAfter": {
+        "enabled": true,
+        "after": "",
+        "insertAtEnd": false,
+        "createIfNotFound": false,
+        "createIfNotFoundLocation": "top"
+      },
+      "prepend": true,
+      "task": false,
+      "openFileInNewTab": {
+        "enabled": true,
+        "direction": "vertical",
+        "focus": false
+      },
+      "openFile": true,
+      "openFileInMode": "default"
+    },
+    {
+      "id": "fe2972c0-6303-4b3a-8155-a865a051fee2",
+      "name": "Suffix",
+      "type": "Capture",
+      "command": true,
+      "appendLink": false,
+      "captureTo": "_llb-tr_/vocab/suffixes/{{VALUE}}.md",
+      "captureToActiveFile": false,
+      "createFileIfItDoesntExist": {
+        "enabled": true,
+        "createWithTemplate": true,
+        "template": "_llb-tr_/templates/suffix"
+      },
+      "format": {
+        "enabled": true,
+        "format": ""
+      },
+      "insertAfter": {
+        "enabled": true,
+        "after": "",
+        "insertAtEnd": false,
+        "createIfNotFound": false,
+        "createIfNotFoundLocation": "top"
+      },
+      "prepend": true,
+      "task": false,
+      "openFileInNewTab": {
+        "enabled": true,
+        "direction": "vertical",
+        "focus": false
+      },
+      "openFile": true,
+      "openFileInMode": "default"
+    }
+  ],
+  "macros": [],
+  "inputPrompt": "single-line",
+  "devMode": false
+}
