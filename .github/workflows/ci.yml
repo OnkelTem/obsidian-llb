@@ -23,10 +23,10 @@ jobs:
         run: npm test
       - name: Building project
         run: npm run build
-      - name: Creating vault
-        run: ./bin/obsidian-llb create download/vault-dist
       - name: Create artifacts directory
         run: mkdir download
+      - name: Creating vault
+        run: ./bin/obsidian-llb create tr download/vault-dist
       - name: Create npm package
         run: npm pack --pack-destination download
       - uses: actions/upload-artifact@v3
