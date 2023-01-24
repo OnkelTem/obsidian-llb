@@ -1,0 +1,42 @@
+name: Build and publish main
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://registry.npmjs.org"
+      - name: Installing dependencies
+        run: npm ci
+      - name: Running tests
+        run: npm test
+      - name: Building project
+        run: npm run build
+      - name: Read package.json version
+        run: echo "version=$(jq -r -c .version package.json)" >> $GITHUB_ENV
+      - name: Calculate vault name
+        run: echo "vault=obsidian-llb-vault-${{env.version}}" >> $GITHUB_ENV
+      - name: Creating dist vault
+        run: ./bin/obsidian-llb create tr ${{env.vault}} && zip -r ${{env.vault}}.zip ${{env.vault}}
+      # - name: Publishing
+      #   run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: ${{ github.workspace }}/docs/release-notes/${{env.version}}.md
+          files: ${{env.vault}}.zip

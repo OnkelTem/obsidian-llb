@@ -61,7 +61,7 @@
       "prepend": true,
       "task": false,
       "openFileInNewTab": {
-        "enabled": true,
+        "enabled": false,
         "direction": "vertical",
         "focus": false
       },
@@ -95,7 +95,7 @@
       "prepend": true,
       "task": false,
       "openFileInNewTab": {
-        "enabled": true,
+        "enabled": false,
         "direction": "vertical",
         "focus": false
       },
