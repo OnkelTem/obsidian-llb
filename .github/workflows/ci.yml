@@ -1,0 +1,39 @@
+name: Build and create artifacts
+on:
+  # release:
+  #   types: [created]
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://registry.npmjs.org"
+      - name: Installing dependencies
+        run: npm ci
+      - name: Running tests
+        run: npm test
+      - name: Building project
+        run: npm run build
+      - name: Creating vault
+        run: ./bin/obsidian-llb create download/vault-dist
+      - name: Create artifacts directory
+        run: mkdir download
+      - name: Create npm package
+        run: npm pack --pack-destination download
+      - uses: actions/upload-artifact@v3
+        with:
+          name: download
+          path: download
+      # - name: Publishing
+      #   run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
