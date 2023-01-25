@@ -1,0 +1,17 @@
+name: Main CI
+on:
+  push:
+# push:
+#   tags:
+#     - "v*.*.*"
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{github}}
