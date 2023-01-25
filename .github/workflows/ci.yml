@@ -17,5 +17,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set debug vars
-        env: { CONTENT: "${{ toJson(steps) }}" }
+        env: { CONTENT: "${{ toJson(github) }}" }
         run: "echo $CONTENT"
