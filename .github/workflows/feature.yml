@@ -1,4 +1,4 @@
-name: Build feature
+name: Feature build
 on:
   workflow_dispatch:
 
@@ -21,13 +21,19 @@ jobs:
         run: npm test
       - name: Building project
         run: npm run build
-      - name: Create artifacts directory
-        run: mkdir download
-      - name: Creating vault
-        run: ./bin/obsidian-llb create tr download/vault-dist
-      - name: Create npm package
-        run: npm pack --pack-destination download
+      - name: Read package.json version
+        run: echo "version=$(jq -r -c .version package.json)" >> $GITHUB_ENV
+      - name: Calculate vault name
+        run: echo "vault=obsidian-llb-vault-${{env.version}}" >> $GITHUB_ENV
+      # - name: Create artifacts directory
+      #   run: mkdir download
+      - name: Creating dist vault
+        run: ./bin/obsidian-llb create tr ${{env.vault}} # && zip -r ${{env.vault}}.zip ${{env.vault}}
       - uses: actions/upload-artifact@v3
         with:
-          name: download
-          path: download
+          path: ${{env.vault}}
+      - name: Create npm package
+        run: npm pack
+      - uses: actions/upload-artifact@v3
+        with:
+          path: obsidian-llb-${{env.version}}.tgz
